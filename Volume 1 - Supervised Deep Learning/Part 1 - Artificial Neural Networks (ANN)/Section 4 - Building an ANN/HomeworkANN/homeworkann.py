@@ -5,7 +5,7 @@ dataset = pd.read_csv("Iris.csv")
 x = dataset.iloc[:,1:4].values
 y = dataset.iloc[:,-1].values
 
-
+#%%
 from sklearn.preprocessing import LabelEncoder, OneHotEncoder
 labelEncoder_y = LabelEncoder()
 y = labelEncoder_y.fit_transform(y)
@@ -27,6 +27,8 @@ classifier = Sequential()
 classifier.add(Dense(output_dim = 2, init="uniform", activation="relu",input_dim=4))
 
 classifier.add(Dense(output_dim = 2, init="uniform", activation="relu"))
+
+classifier.add(Dense(output_dim = 1 ,init="uniform", activation))
 
 
 
