@@ -43,16 +43,14 @@ classifier = Sequential()
 
 classifier.add(Dense(output_dim=8,activation="relu",init="uniform",input_dim=60))
 
-classifier.add(Dense(output_dim=8,activation="relu",init="uniform",))
-
-classifier.add(Dense(output_dim=8,activation="relu",init="uniform",))
+classifier.add(Dense(output_dim=8,activation="relu",init="uniform"))
 
 classifier.add(Dense(output_dim=1,activation="sigmoid",init="uniform"))
 
 classifier.compile(optimizer = 'adam', loss = 'binary_crossentropy', metrics = ['accuracy'])
 
 #Fitting the ANN to the Training Set
-classifier.fit(x_train,y_train, batch_size = 10,nb_epoch = 1000)
+classifier.fit(x_train,y_train, batch_size = 10,nb_epoch = 100)
 
 y_pred = classifier.predict(x_test)
 y_pred_acc = (y_pred > 0.5)
