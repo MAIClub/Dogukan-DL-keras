@@ -40,59 +40,59 @@ from sklearn.preprocessing import StandardScaler
 sc = StandardScaler()
 X_train = sc.fit_transform(X_train)
 X_test = sc.transform(X_test)
-
+#
 # Part 2 - Now let's make the ANN!
-
-# Importing the Keras libraries and packages
-import keras
-from keras.models import Sequential
-from keras.layers import Dense
-from keras.layers import Dropout
-
-# Initialising the ANN
-classifier = Sequential()
-
-# Adding the input layer and the first hidden layer
-classifier.add(Dense(units = 6, kernel_initializer = 'uniform', activation = 'relu', input_dim = 11))
-# classifier.add(Dropout(p = 0.1))
-
-# Adding the second hidden layer
-classifier.add(Dense(units = 6, kernel_initializer = 'uniform', activation = 'relu'))
-# classifier.add(Dropout(p = 0.1))
-
-# Adding the output layer
-classifier.add(Dense(units = 1, kernel_initializer = 'uniform', activation = 'sigmoid'))
-
-# Compiling the ANN
-classifier.compile(optimizer = 'adam', loss = 'binary_crossentropy', metrics = ['accuracy'])
-
-# Fitting the ANN to the Training set
-classifier.fit(X_train, y_train, batch_size = 10, epochs = 100)
-
-# Part 3 - Making predictions and evaluating the model
-
-# Predicting the Test set results
-y_pred = classifier.predict(X_test)
-y_pred = (y_pred > 0.5)
-
-# Predicting a single new observation
-"""Predict if the customer with the following informations will leave the bank:
-Geography: France
-Credit Score: 600
-Gender: Male
-Age: 40
-Tenure: 3
-Balance: 60000
-Number of Products: 2
-Has Credit Card: Yes
-Is Active Member: Yes
-Estimated Salary: 50000"""
-new_prediction = classifier.predict(sc.transform(np.array([[0.0, 0, 600, 1, 40, 3, 60000, 2, 1, 1, 50000]])))
-new_prediction = (new_prediction > 0.5)
-
-# Making the Confusion Matrix
-from sklearn.metrics import confusion_matrix
-cm = confusion_matrix(y_test, y_pred)
+#
+## Importing the Keras libraries and packages
+#import keras
+#from keras.models import Sequential
+#from keras.layers import Dense
+#from keras.layers import Dropout
+#
+## Initialising the ANN
+#classifier = Sequential()
+#
+## Adding the input layer and the first hidden layer
+#classifier.add(Dense(units = 6, kernel_initializer = 'uniform', activation = 'relu', input_dim = 11))
+## classifier.add(Dropout(p = 0.1))
+#
+## Adding the second hidden layer
+#classifier.add(Dense(units = 6, kernel_initializer = 'uniform', activation = 'relu'))
+## classifier.add(Dropout(p = 0.1))
+#
+## Adding the output layer
+#classifier.add(Dense(units = 1, kernel_initializer = 'uniform', activation = 'sigmoid'))
+#
+## Compiling the ANN
+#classifier.compile(optimizer = 'adam', loss = 'binary_crossentropy', metrics = ['accuracy'])
+#
+## Fitting the ANN to the Training set
+#classifier.fit(X_train, y_train, batch_size = 10, epochs = 100)
+#
+## Part 3 - Making predictions and evaluating the model
+#
+## Predicting the Test set results
+#y_pred = classifier.predict(X_test)
+#y_pred = (y_pred > 0.5)
+#
+## Predicting a single new observation
+#"""Predict if the customer with the following informations will leave the bank:
+#Geography: France
+#Credit Score: 600
+#Gender: Male
+#Age: 40
+#Tenure: 3
+#Balance: 60000
+#Number of Products: 2
+#Has Credit Card: Yes
+#Is Active Member: Yes
+#Estimated Salary: 50000"""
+#new_prediction = classifier.predict(sc.transform(np.array([[0.0, 0, 600, 1, 40, 3, 60000, 2, 1, 1, 50000]])))
+#new_prediction = (new_prediction > 0.5)
+#
+## Making the Confusion Matrix
+#from sklearn.metrics import confusion_matrix
+#cm = confusion_matrix(y_test, y_pred)
 
 # Part 4 - Evaluating, Improving and Tuning the ANN
 
@@ -112,3 +112,5 @@ classifier = KerasClassifier(build_fn = build_classifier, batch_size = 10, epoch
 accuracies = cross_val_score(estimator = classifier, X = X_train, y = y_train, cv = 10, n_jobs = -1)
 mean = accuracies.mean()
 variance = accuracies.std()
+
+print(mean,variance)
