@@ -92,6 +92,8 @@ from sklearn.model_selection import cross_val_score
 from keras.models import Sequential
 from keras.layers import Dense
 
+from keras.layers import Dropout
+
 
 def build_classifier():
     classifier = Sequential()
