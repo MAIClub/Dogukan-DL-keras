@@ -32,33 +32,32 @@ sc = StandardScaler()
 X_train = sc.fit_transform(X_train)
 X_test = sc.transform(X_test)
 #
-# Part 2 - Now let's make the ANN!
 
-## Importing the Keras libraries and packages
-# import keras
-# from keras.models import Sequential
-# from keras.layers import Dense
-# from keras.layers import Dropout
-#
-## Initialising the ANN
-# classifier = Sequential()
-#
-## Adding the input layer and the first hidden layer
-# classifier.add(Dense(units = 6, kernel_initializer = 'uniform', activation = 'relu', input_dim = 11))
-## classifier.add(Dropout(p = 0.1))
-#
-## Adding the second hidden layer
-# classifier.add(Dense(units = 6, kernel_initializer = 'uniform', activation = 'relu'))
-## classifier.add(Dropout(p = 0.1))
-#
-## Adding the output layer
-# classifier.add(Dense(units = 1, kernel_initializer = 'uniform', activation = 'sigmoid'))
-#
-## Compiling the ANN
-# classifier.compile(optimizer = 'adam', loss = 'binary_crossentropy', metrics = ['accuracy'])
-#
-## Fitting the ANN to the Training set
-# classifier.fit(X_train, y_train, batch_size = 10, epochs = 100)
+# Importing the Keras libraries and packages
+ import keras
+ from keras.models import Sequential
+ from keras.layers import Dense
+ from keras.layers import Dropout
+
+# Initialising the ANN
+ classifier = Sequential()
+
+# Adding the input layer and the first hidden layer
+ classifier.add(Dense(units = 6, kernel_initializer = 'uniform', activation = 'tanh', input_dim = 11))
+# classifier.add(Dropout(p = 0.1))
+
+# Adding the second hidden layer
+ classifier.add(Dense(units = 6, kernel_initializer = 'uniform', activation = 'tanh'))
+# classifier.add(Dropout(p = 0.1))
+
+# Adding the output layer
+ classifier.add(Dense(units = 1, kernel_initializer = 'uniform', activation = 'sigmoid'))
+
+# Compiling the ANN
+ classifier.compile(optimizer = 'adamax', loss = 'binary_crossentropy', metrics = ['accuracy'])
+
+# Fitting the ANN to the Training set
+ classifier.fit(X_train, y_train, batch_size = 10, epochs = 100)
 #
 ## Part 3 - Making predictions and evaluating the model
 #
@@ -132,3 +131,10 @@ grid_search = GridSearchCV(estimator = classifier, param_grid = parameters, scor
 grid_search = grid_search.fit(X_train,y_train)
 best_parameters = grid_search.best_params_
 best_accuracy = grid_search.best_score_
+
+
+
+###SINGLE PREDICTION########
+pred_array = sc.transform(np.array([[0,0,600,1,40,3,60000,2,1,1,50000]]))
+single_pred = classifier.predict(pred_array)
+####ENDOF SINGLE PREDICTION
