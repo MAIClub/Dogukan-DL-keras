@@ -96,11 +96,10 @@ from keras.layers import Dropout
 
 def build_classifier():
     classifier = Sequential()
-    classifier.add(Dense(units=6, kernel_initializer='uniform', activation='relu', input_dim=11))
-    classifier.add(Dense(units=6, kernel_initializer='uniform', activation='relu'))
+    classifier.add(Dense(units=6, kernel_initializer='uniform', activation='tanh', input_dim=11))
+    classifier.add(Dense(units=6, kernel_initializer='uniform', activation='tanh'))
     classifier.add(Dense(units=1, kernel_initializer='uniform', activation='sigmoid'))
-
-    classifier.compile(optimizer='rmsprop', loss='binary_crossentropy', metrics=['accuracy'])
+    classifier.compile(optimizer='adamax', loss='binary_crossentropy', metrics=['accuracy'])
     return classifier
 
 
@@ -128,7 +127,7 @@ def build_classifier(optimizer):
 
 
 classifier = KerasClassifier(build_fn=build_classifier)
-parameters = {'batch_size' : [5,10,25,32,50],'epochs' : [100,250,500], 'optimizer' : ['adam','rmsprop','sgd']}
+parameters = {'batch_size' : [10,25],'epochs' : [500,750], 'optimizer' : ['adamax','rmsprop']}
 grid_search = GridSearchCV(estimator = classifier, param_grid = parameters, scoring = "accuracy",cv = 10)
 grid_search = grid_search.fit(X_train,y_train)
 best_parameters = grid_search.best_params_

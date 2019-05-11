@@ -1,0 +1,12 @@
+optimizer   batch_size   epoch   accuracy
+adamax(tanh)     10      500     0.861874
+adamax      10           750     0.855125
+rmsprop     25           500     0.854874
+rmsprop     25           800     0.854624
+adamax      25           500     0.846500
+rmsprop     20           750     0.846250
+adamax      10           500     0.845249
+adamax      30           500     0.839374
+adamax(3 layers) 10      500     0.838749  
+rmsprop(dropout) 25      500     0.837499 
+rmsprop     25           500     0.831912
