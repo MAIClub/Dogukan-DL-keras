@@ -46,17 +46,17 @@ scaler=StandardScaler()
 x_train = scaler.fit_transform(x_train)
 x_test = scaler.transform(x_test)
 
+#%%
 from keras.models import Sequential
 from keras.layers import Dense
 
-#%%
 
 
 model =Sequential()
-model.add(Dense(units = 78, kernel_initializer = 'uniform', activation = 'softmax', input_dim = 155))
-model.add(Dense(units = 78, kernel_initializer = 'uniform', activation = 'softmax'))
-model.add(Dense(units = 1, kernel_initializer = 'uniform', activation = 'softmax'))
-model.compile(optimizer = 'adam', loss = 'mean_squared_error', metrics = ['accuracy'])
+model.add(Dense(units = 12, init = 'uniform', activation = 'softmax', input_dim = 155))
+model.add(Dense(units = 12, init = 'uniform', activation = 'softmax'))
+model.add(Dense(units = 1, init = 'uniform', activation = 'softmax'))
+model.compile(optimizer = 'adam', loss = 'binary_crossentropy', metrics = ['accuracy'])
 model.fit(x_train, y_train, batch_size = 10, epochs = 100)
 
 

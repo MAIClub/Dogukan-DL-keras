@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 
 dataset = pd.read_csv("heart.csv")
-dataset = dataset.iloc[:300,:]
+#dataset = dataset.iloc[:300,:]
 x = dataset.iloc[:,0:13].values
 y = dataset.iloc[:,13].values
 
