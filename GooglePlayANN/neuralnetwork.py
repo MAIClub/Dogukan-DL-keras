@@ -49,8 +49,6 @@ from keras.models import Sequential
 from keras.layers import Dense
 from keras.layers import Dropout
 #%% NORMAL TRAIN
-
-
 model =Sequential()
 model.add(Dense(units = 78, init = 'uniform', activation = 'softsign', input_dim = 155))
 model.add(Dense(units = 78, init = 'uniform', activation = 'softsign'))
@@ -58,7 +56,7 @@ model.add(Dense(units = 78, init = 'uniform', activation = 'softsign'))
 model.add(Dense(units = 78, init = 'uniform', activation = 'softsign'))
 model.add(Dense(units = 19, init = 'uniform', activation = 'softmax'))
 model.compile(optimizer = 'adam', loss = 'categorical_crossentropy', metrics = ['accuracy'])
-model.fit(x_train, y_train, batch_size = 10, epochs = 750)
+model.fit(x_train, y_train, batch_size = 10, epochs = 250)
 
 #%%CROSS VAL
 
