@@ -17,18 +17,20 @@ x = df.iloc[:,1:5].join(df.iloc[:,6:10]).values
 y = df["Installs"].values
 #Label and Hot Encode
 from sklearn.preprocessing import LabelEncoder,OneHotEncoder
+from sklearn.externals import joblib
 from keras.utils import np_utils
 categoryEncoder = LabelEncoder()
-typeEncoder = LabelEncoder()
-contentEncoder = LabelEncoder()
-genreEncoder = LabelEncoder()
+#ypeEncoder = LabelEncoder()
+#contentEncoder = LabelEncoder()
+#genreEncoder = LabelEncoder()
 x[:,0] = categoryEncoder.fit_transform(x[:, 0])
-x[:,4] = typeEncoder.fit_transform(x[:,4])
-x[:,6] = contentEncoder.fit_transform(x[:,6])
-x[:,7] = genreEncoder.fit_transform(x[:,7])
+x[:,4] = categoryEncoder.fit_transform(x[:,4])
+x[:,6] = categoryEncoder.fit_transform(x[:,6])
+x[:,7] = categoryEncoder.fit_transform(x[:,7])
 oneHotEncoder = OneHotEncoder(categorical_features=[0,4,6,7])
 x = oneHotEncoder.fit_transform(x).toarray()
-#
+joblib.dump(categoryEncoder,"encoder.pkl")
+
 # encode class values as integers
 encoder = LabelEncoder()
 encoder.fit(y)
@@ -50,13 +52,15 @@ from keras.layers import Dense
 from keras.layers import Dropout
 #%% NORMAL TRAIN
 model =Sequential()
-model.add(Dense(units = 78, init = 'uniform', activation = 'softsign', input_dim = 155))
-model.add(Dense(units = 78, init = 'uniform', activation = 'softsign'))
-model.add(Dense(units = 78, init = 'uniform', activation = 'softsign'))
-model.add(Dense(units = 78, init = 'uniform', activation = 'softsign'))
+model.add(Dense(units = 120, init = 'uniform', activation = 'softsign', input_dim = 155))
+model.add(Dense(units = 120, init = 'uniform', activation = 'softsign'))
+model.add(Dense(units = 120, init = 'uniform', activation = 'softsign'))
+model.add(Dense(units = 120, init = 'uniform', activation = 'softsign'))
 model.add(Dense(units = 19, init = 'uniform', activation = 'softmax'))
 model.compile(optimizer = 'adam', loss = 'categorical_crossentropy', metrics = ['accuracy'])
-model.fit(x_train, y_train, batch_size = 10, epochs = 250)
+model.fit(x_train, y_train, batch_size = 100, epochs = 2000)
+
+
 
 #%%CROSS VAL
 
@@ -95,8 +99,13 @@ grid_search = GridSearchCV(estimator = classifier, param_grid = parameters, scor
 grid_search = grid_search.fit(x_train,y_train)
 best_parameters = grid_search.best_params_
 best_accuracy = grid_search.best_score_
+#%%pred
 
-
+pred_array = np.array([[0,4.5,169,5.6,0,0,1,1]])
+enc = joblib.load("encoder.pkl")
+pred_array = enc.fit_transform(pred_array).toarray()
+pred_array = scaler.transform(pred_array)
+single_pred = model.predict(pred_array)
 
 
 
