@@ -1,4 +1,6 @@
-            
+#%%
+%cd GooglePlayANN/
+#%%
 import pandas as pd
 import numpy as np
 ## data cleanup ##
@@ -57,7 +59,7 @@ model.add(Dense(units = 120, init = 'uniform', activation = 'softsign'))
 model.add(Dense(units = 120, init = 'uniform', activation = 'softsign'))
 model.add(Dense(units = 120, init = 'uniform', activation = 'softsign'))
 model.add(Dense(units = 19, init = 'uniform', activation = 'softmax'))
-model.compile(optimizer = 'adam', loss = 'categorical_crossentropy', metrics = ['accuracy'])
+model.compile(optimizer = 'adam', loss = 'binary_crossentropy', metrics = ['accuracy'])
 model.fit(x_train, y_train, batch_size = 100, epochs = 2000)
 
 
@@ -108,14 +110,4 @@ pred_array = scaler.transform(pred_array)
 single_pred = model.predict(pred_array)
 
 
-
-
-
-
-
-  
-
-
-
-
-
+#%%
