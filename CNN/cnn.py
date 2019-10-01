@@ -1,6 +1,8 @@
 from keras.models import Sequential
 from keras.layers import Convolution2D,MaxPooling2D,Flatten,Dense,Dropout,BatchNormalization
 
+
+
 model = Sequential()
 model.add(Convolution2D(8,3,3,input_shape= (64,64,3),activation = 'relu'))
 model.add(MaxPooling2D(pool_size=(2,2)))
